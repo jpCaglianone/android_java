@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Pessoa {
     private String nome;
-    private Date dataNascimento;
+    private String dataNascimento;
     private long id;
     private float altura;
     private float peso;
@@ -13,7 +13,14 @@ public class Pessoa {
     // Construtor vazio
     public Pessoa() {
     }
+    public Pessoa(String nome, String dataNascimento, float altura, float peso, boolean sexo) {
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
 
+        this.altura = altura;
+        this.peso = peso;
+        this.sexo = sexo;
+    }
     // Getters e setters para os atributos
 
     public String getNome() {
@@ -24,11 +31,11 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

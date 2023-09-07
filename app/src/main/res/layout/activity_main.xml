@@ -1,42 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
     <Button
         android:id="@+id/btnIncluir"
         android:layout_width="111dp"
         android:layout_height="43dp"
         android:text="Incluir"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="54dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnListar" />
 
     <Button
         android:id="@+id/btnListar"
         android:layout_width="111dp"
         android:layout_height="43dp"
         android:text="Listar"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="277dp" />
+        app:layout_constraintTop_toBottomOf="@+id/btnIncluir"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnExcluir" />
 
     <Button
         android:id="@+id/btnExcluir"
         android:layout_width="111dp"
         android:layout_height="43dp"
         android:text="Excluir"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="134dp" />
+        app:layout_constraintTop_toBottomOf="@+id/btnListar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnAlterar" />
 
     <Button
         android:id="@+id/btnAlterar"
         android:layout_width="111dp"
         android:layout_height="43dp"
         android:text="Alterar"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="202dp" />
+        app:layout_constraintTop_toBottomOf="@+id/btnExcluir"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

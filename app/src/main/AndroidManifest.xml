@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -21,10 +20,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".Activity_incluir" />
+        <activity android:name=".Activity_excluir" />
+        <activity android:name=".Activity_alterar" />
+        <activity android:name=".Activity_listar" />
+
     </application>
 </manifest>
-
-
-
-
-
