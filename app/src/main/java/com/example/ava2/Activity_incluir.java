@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class Activity_incluir extends Activity {
     private EditText editTextNome, editTextDataNascimento, editTextAltura, editTextPeso;
@@ -36,26 +37,25 @@ public class Activity_incluir extends Activity {
         buttonSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Obtenha os dados dos EditText e do RadioGroup
                 String nome = editTextNome.getText().toString();
                 String dataNascimento = editTextDataNascimento.getText().toString();
                 String altura = editTextAltura.getText().toString();
                 String peso = editTextPeso.getText().toString();
                 String sexo = ((RadioButton) findViewById(radioGroupSexo.getCheckedRadioButtonId())).getText().toString();
 
-                // Crie um objeto Pessoa
                 Pessoa pessoa = new Pessoa(nome, dataNascimento, Float.parseFloat(altura), Float.parseFloat(peso), Boolean.parseBoolean(sexo));
 
-                // Insira os dados no banco de dados
                 BancoDados bancoDados = new BancoDados(Activity_incluir.this);
                 bancoDados.inserirPessoa(pessoa);
 
-                // Limpe os campos após a inserção
                 editTextNome.setText("");
                 editTextDataNascimento.setText("");
                 editTextAltura.setText("");
                 editTextPeso.setText("");
+
+                Toast.makeText(Activity_incluir.this, "Inclusao realizada com sucesso!", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 }

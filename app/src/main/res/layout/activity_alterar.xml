@@ -1,42 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!-- Adicione esses elementos ao seu layout activity_alterar.xml -->
 
     <Button
-        android:id="@+id/btnIncluir"
-        android:layout_width="111dp"
-        android:layout_height="43dp"
-        android:text="Incluir"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="54dp" />
+        android:id="@+id/buttonVoltar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voltar" />
+    <EditText
+        android:id="@+id/editTextIdConsulta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID da Pessoa para Consultar" />
 
     <Button
-        android:id="@+id/btnListar"
-        android:layout_width="111dp"
-        android:layout_height="43dp"
-        android:text="Listar"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="277dp" />
+        android:id="@+id/buttonConsultarId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Consultar por ID" />
+
+    <EditText
+        android:id="@+id/editTextNomeResultado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:id="@+id/editTextDataNascimentoResultado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Data de Nascimento (YYYY-MM-DD)" />
+
+    <EditText
+        android:id="@+id/editTextAlturaResultado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Altura" />
+
+    <EditText
+        android:id="@+id/editTextPesoResultado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Peso" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupSexoResultado"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="75dp">
+
+        <RadioButton
+            android:id="@+id/radioButtonMasculinoResultado"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:text="Masculino" />
+
+        <RadioButton
+            android:id="@+id/radioButtonFemininoResultado"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:text="Feminino" />
+    </RadioGroup>
 
     <Button
-        android:id="@+id/btnExcluir"
-        android:layout_width="111dp"
-        android:layout_height="43dp"
-        android:text="Excluir"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="134dp" />
+        android:id="@+id/buttonAlterar"
+        android:layout_width="413dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="25dp"
+        android:text="Alterar" />
 
-    <Button
-        android:id="@+id/btnAlterar"
-        android:layout_width="111dp"
-        android:layout_height="43dp"
-        android:text="Alterar"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="202dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

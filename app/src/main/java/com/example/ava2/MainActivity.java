@@ -3,6 +3,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
@@ -35,8 +36,9 @@ public class MainActivity extends AppCompatActivity {
         btnExcluir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Activity_excluir.class);
-                startActivity(intent);
+                BancoDados bancoDados = new BancoDados(MainActivity.this);
+                bancoDados.excluirTodos();
+                Toast.makeText(MainActivity.this, "Todos os dados foram excluídos", Toast.LENGTH_SHORT).show();
             }
         });
 

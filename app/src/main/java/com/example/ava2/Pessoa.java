@@ -1,16 +1,14 @@
 package com.example.ava2;
 
-import java.util.Date;
-
 public class Pessoa {
+    private long id;
     private String nome;
     private String dataNascimento;
-    private long id;
     private float altura;
     private float peso;
     private boolean sexo;
 
-    // Construtor vazio
+
     public Pessoa() {
     }
     public Pessoa(String nome, String dataNascimento, float altura, float peso, boolean sexo) {
@@ -39,13 +37,6 @@ public class Pessoa {
         this.dataNascimento = dataNascimento;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public float getAltura() {
         return altura;
@@ -57,6 +48,14 @@ public class Pessoa {
 
     public float getPeso() {
         return peso;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public void setPeso(float peso) {

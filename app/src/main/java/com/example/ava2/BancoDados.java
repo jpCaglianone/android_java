@@ -42,8 +42,8 @@ public class BancoDados extends SQLiteOpenHelper {
         // Atualizações de esquema, se necessário
     }
 
-    // Operação CREATE (Inserir Dados)
-    public long inserirPessoa(Pessoa pessoa) {
+
+    public void inserirPessoa(Pessoa pessoa) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NOME, pessoa.getNome());
@@ -52,9 +52,26 @@ public class BancoDados extends SQLiteOpenHelper {
         values.put(COLUMN_PESO, pessoa.getPeso());
         values.put(COLUMN_SEXO, pessoa.isSexo());
 
+        // Consulta para obter o maior ID atual na tabela Pessoas
+        String query = "SELECT MAX(" + COLUMN_ID + ") FROM " + TABLE_PESSOAS;
+        Cursor cursor = db.rawQuery(query, null);
+        long novoId = 1; // Valor padrão se a tabela estiver vazia
+
+        if (cursor != null && cursor.moveToFirst()) {
+            novoId = cursor.getLong(0) + 1;
+            cursor.close();
+        }
+
+        // Define o novo ID no ContentValues
+        values.put(COLUMN_ID, novoId);
+
+        System.out.println(novoId);
+
+        // Insere o novo registro com o ID atualizado
         long id = db.insert(TABLE_PESSOAS, null, values);
         db.close();
-        return id;
+
+
     }
 
 
@@ -72,6 +89,7 @@ public class BancoDados extends SQLiteOpenHelper {
             int columnIndexAltura = cursor.getColumnIndex(COLUMN_ALTURA);
             int columnIndexPeso = cursor.getColumnIndex(COLUMN_PESO);
             int columnIndexSexo = cursor.getColumnIndex(COLUMN_SEXO);
+            int columnIndexId = cursor.getColumnIndex(COLUMN_ID);
 
             if (cursor.moveToFirst()) {
                 do {
@@ -79,12 +97,12 @@ public class BancoDados extends SQLiteOpenHelper {
                     pessoa.setNome(cursor.getString(columnIndexNome));
                     pessoa.setDataNascimento(cursor.getString(columnIndexDataNascimento));
 
-                    // Converte as strings para float diretamente sem try-catch
+
                     pessoa.setAltura(Float.parseFloat(cursor.getString(columnIndexAltura)));
                     pessoa.setPeso(Float.parseFloat(cursor.getString(columnIndexPeso)));
 
-                    // O campo "Sexo" é booleano, portanto, use isSexo() para definir o valor booleano
-                    pessoa.setSexo(cursor.getInt(columnIndexSexo) == 1);
+                    pessoa.setSexo(Boolean.parseBoolean(String.valueOf(cursor.getInt(columnIndexSexo))));
+                    pessoa.setId(cursor.getInt(columnIndexId));
 
                     pessoas.add(pessoa);
                 } while (cursor.moveToNext());
@@ -97,13 +115,33 @@ public class BancoDados extends SQLiteOpenHelper {
 
         return pessoas;
     }
+    public Pessoa consultarPessoaPorId(int pessoaId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_PESSOAS, null, COLUMN_ID + " = ?", new String[]{String.valueOf(pessoaId)}, null, null, null);
+
+        Pessoa pessoa = null;
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                pessoa = new Pessoa();
+                pessoa.setId(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
+                pessoa.setNome(cursor.getString(cursor.getColumnIndex(COLUMN_NOME)));
+                pessoa.setDataNascimento(cursor.getString(cursor.getColumnIndex(COLUMN_DATA_NASCIMENTO)));
+                pessoa.setAltura(cursor.getFloat(cursor.getColumnIndex(COLUMN_ALTURA)));
+                pessoa.setPeso(cursor.getFloat(cursor.getColumnIndex(COLUMN_PESO)));
+                pessoa.setSexo(cursor.getInt(cursor.getColumnIndex(COLUMN_SEXO)) == 1);
+            }
+
+            cursor.close();
+        }
+
+        db.close();
+
+        return pessoa;
+    }
 
 
-
-
-
-
-    // Operação UPDATE (Atualizar Dados)
     public int atualizarPessoa(Pessoa pessoa) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -111,17 +149,27 @@ public class BancoDados extends SQLiteOpenHelper {
         values.put(COLUMN_DATA_NASCIMENTO, pessoa.getDataNascimento());
         values.put(COLUMN_ALTURA, pessoa.getAltura());
         values.put(COLUMN_PESO, pessoa.getPeso());
-        values.put(COLUMN_SEXO, pessoa.isSexo());
+        values.put(COLUMN_SEXO, pessoa.isSexo() ? 1 : 0);
 
-        return db.update(TABLE_PESSOAS, values, COLUMN_ID + " = ?",
-                new String[]{String.valueOf(pessoa.getId())});
+        int rowsAffected = db.update(TABLE_PESSOAS, values, COLUMN_ID + " = ?", new String[]{String.valueOf(pessoa.getId())});
+        db.close();
+
+        return rowsAffected;
     }
 
-    // Operação DELETE (Excluir Dados)
+
+
     public void excluirPessoa(int pessoaId) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_PESSOAS, COLUMN_ID + " = ?",
                 new String[]{String.valueOf(pessoaId)});
         db.close();
     }
+
+    public void excluirTodos() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_PESSOAS, null, null);
+        db.close();
+    }
+
 }

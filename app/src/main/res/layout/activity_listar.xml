@@ -3,15 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <!-- Adicione uma ListView para exibir a lista de pessoas -->
+    <Button
+        android:id="@+id/buttonVoltar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voltar" />
     <ListView
         android:id="@+id/listViewPessoas"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <Button
-        android:id="@+id/btnVoltar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Voltar" />
+    <!-- Adicione uma ListView para exibir a lista de pessoas -->
+    <include layout="@layout/list_layout" />
+
+
 </LinearLayout>
